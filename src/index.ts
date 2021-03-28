@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import cors from 'cors'
 import multer from 'multer'
 // import fs from 'fs'
@@ -18,9 +19,17 @@ app.post('/upload', upload.array('zip'), async (req, res) => {
     console.log('zip file',  zip)
 
     if(zip && micmacScript && email) {
-        await fs.writeFile('download.zip', zip.buffer)
+        const fileName = 'download.zip'
+        const filePath = path.join(__dirname, fileName)
+        await fs.writeFile(filePath, zip.buffer)
         res.send()
-        await generateMesh()
+
+        try {
+            await generateMesh(fileName)
+        } catch(error) {
+            // TODO send error email
+        }
+
 
     } else {
         res.sendStatus(400)
