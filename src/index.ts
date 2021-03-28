@@ -25,7 +25,7 @@ app.post('/upload', upload.array('zip'), async (req, res) => {
         res.send()
 
         try {
-            await generateMesh(fileName)
+            await generateMesh(fileName, micmacScript.split('\n'))
         } catch(error) {
             // TODO send error email
         }

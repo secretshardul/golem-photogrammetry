@@ -7,7 +7,7 @@ dayjs.extend(duration)
 
 const { asyncWith, logUtils, range } = utils
 
-export default async function generateMesh(fileName: string) {
+export default async function generateMesh(fileName: string, instructions: string[]) {
     const MICMAC_HASH = '6d6069a827b0674d7b5463ccb1b2c7c375b14f23c5dec8dba8f114ae'
     const subnet_tag = 'devnet-beta.1'
     const driver = 'zksync'
@@ -21,6 +21,7 @@ export default async function generateMesh(fileName: string) {
     })
 
     async function* worker(ctx: WorkContext, tasks: Task<any, any>[]) {
+        console.log('Got instructions', instructions)
 
         ctx.send_file(
             path.join(__dirname, '../', fileName),
@@ -33,6 +34,23 @@ export default async function generateMesh(fileName: string) {
         ])
 
         for await (let task of tasks) {
+            for(let instr of instructions) {
+                ctx.run("/bin/sh", [
+                    "-c",
+                    instr,
+                ])
+            }
+
+            ctx.run("/bin/sh", [
+                "-c",
+                'zip -r /golem/resource/output.zip /golem/resource/extracted',
+            ])
+
+            ctx.download_file(
+                "/golem/resource/output.zip",
+                path.join(__dirname, 'response', 'output.zip')
+            )
+
             yield ctx.commit({ timeout: dayjs.duration({ seconds: 120 }).asMilliseconds() })
             task.accept_result('done')
         }
