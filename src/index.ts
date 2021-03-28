@@ -3,6 +3,7 @@ import cors from 'cors'
 import multer from 'multer'
 // import fs from 'fs'
 import fs from 'fs/promises'
+import generateMesh from './golem'
 
 const app = express()
 app.use(cors())
@@ -19,6 +20,7 @@ app.post('/upload', upload.array('zip'), async (req, res) => {
     if(zip && micmacScript && email) {
         await fs.writeFile('download.zip', zip.buffer)
         res.send()
+        await generateMesh()
 
     } else {
         res.sendStatus(400)
