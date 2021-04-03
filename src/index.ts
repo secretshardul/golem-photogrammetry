@@ -11,32 +11,35 @@ app.use(express.static(__dirname + '/public'))
 
 const upload = multer({ storage: multer.memoryStorage() })
 
-app.post('/upload', upload.array('zip'), async (req, res) => {
-    console.log('text body', req.body)
-    const {micmacScript, email} = req.body
-    const files = req.files as Express.Multer.File[]
-    const zip = files.pop()
-    console.log('zip file',  zip)
+app.post('/index.html', upload.array('zip'), async (req, res) => {
+    res.redirect('/success.html')
+    // res.sendStatus(200)
 
-    if(zip && micmacScript && email) {
-        // const fileName = 'download.zip'
-        const filePath = path.join(__dirname, zip.originalname)
-        const instructions = micmacScript.split('\n') as string[]
-        console.log('Instructions', instructions)
-        await fs.writeFile(filePath, zip.buffer)
-        res.send()
+    // console.log('text body', req.body)
+    // const {micmacScript, email} = req.body
+    // const files = req.files as Express.Multer.File[]
+    // const zip = files.pop()
+    // console.log('zip file',  zip)
 
-        try {
-            await generateMesh(zip.originalname, instructions)
-        } catch(error) {
-            console.log(error)
-            // TODO send error email
-        }
+    // if(zip && micmacScript && email) {
+    //     // const fileName = 'download.zip'
+    //     const filePath = path.join(__dirname, zip.originalname)
+    //     const instructions = micmacScript.split('\n') as string[]
+    //     console.log('Instructions', instructions)
+    //     await fs.writeFile(filePath, zip.buffer)
+    //     res.send()
+
+    //     try {
+    //         await generateMesh(zip.originalname, instructions)
+    //     } catch(error) {
+    //         console.log(error)
+    //         // TODO send error email
+    //     }
 
 
-    } else {
-        res.sendStatus(400)
-    }
+    // } else {
+    //     res.sendStatus(400)
+    // }
 
 })
 
