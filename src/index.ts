@@ -7,6 +7,7 @@ import generateMesh from './golem'
 
 const app = express()
 app.use(cors())
+app.use(express.static(__dirname + '/public'))
 
 const upload = multer({ storage: multer.memoryStorage() })
 
