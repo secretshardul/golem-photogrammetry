@@ -2,6 +2,7 @@ import path from 'path'
 import dayjs from "dayjs"
 import duration from "dayjs/plugin/duration"
 import { Executor, Task, utils, vm, WorkContext } from "yajsapi"
+import { v4 as uuidv4 } from 'uuid'
 
 dayjs.extend(duration)
 
@@ -13,6 +14,7 @@ export default async function generateMesh(fileName: string, instructions: strin
     const driver = 'zksync'
     const network = 'rinkeby'
     const tasks = [new Task<number, string>(0)]
+    const outputFileName = uuidv4() + '.zip' // UUID to generate a unique name for file
 
     const _package = await vm.repo({
         image_hash: MICMAC_HASH,
@@ -48,7 +50,7 @@ export default async function generateMesh(fileName: string, instructions: strin
 
             ctx.download_file(
                 "/golem/resource/output.zip",
-                path.join(__dirname, 'response', 'output.zip')
+                path.join(__dirname, 'response', outputFileName)
             )
 
             yield ctx.commit({ timeout: dayjs.duration({ seconds: 120 }).asMilliseconds() })
@@ -79,4 +81,5 @@ export default async function generateMesh(fileName: string, instructions: strin
             }
         }
     )
+    return outputFileName
 }

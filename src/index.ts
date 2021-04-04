@@ -4,7 +4,7 @@ import cors from 'cors'
 import multer from 'multer'
 import fs from 'fs/promises'
 import generateMesh from './golem'
-import { sendFailureMail } from './emailController'
+import { sendFailureMail, sendSuccessMail } from './emailController'
 
 const app = express()
 app.use(cors())
@@ -32,25 +32,31 @@ app.post('/', upload.array('zip'), async (req, res) => {
     const zip = files.pop()
     console.log('zip file', zip)
 
-    res.redirect('/success.html')
-    await sendFailureMail(email)
+    // res.redirect('/success.html')
+    // await sendSuccessMail(email, 'https://localhost:3000/download?fileName=output.zip')
+    // await sendFailureMail(email)
 
-    // if(zip && micmacScript && email) {
-    //     const filePath = path.join(__dirname, zip.originalname)
-    //     const instructions = micmacScript.split('\n') as string[]
-    //     console.log('Instructions', instructions)
-    //     await fs.writeFile(filePath, zip.buffer)
-    //     res.redirect('/success.html')
+    if(zip && micmacScript && email) {
+        const filePath = path.join(__dirname, zip.originalname)
+        let instructions = micmacScript.split('\n') as string[]
+        instructions = instructions.map(instruction => {
+            return instruction.trim().replace(/(\r\n|\n|\r)/gm, '')
+        })
+        console.log('Instructions', instructions)
+        await fs.writeFile(filePath, zip.buffer)
+        res.redirect('/success.html')
 
-    //     try {
-    //         await generateMesh(zip.originalname, instructions)
-    //     } catch(error) {
-    //         console.log(error)
-    //         // TODO send error email
-    //     }
-    // } else {
-    //     res.sendStatus(400)
-    // }
+        try {
+            const outputFileName = await generateMesh(zip.originalname, instructions)
+            console.log('Generated file', outputFileName)
+            await sendSuccessMail(email, 'http://localhost:3000/download?fileName=' + outputFileName)
+        } catch(error) {
+            console.log(error)
+            await sendFailureMail(email)
+        }
+    } else {
+        res.sendStatus(400)
+    }
 
 })
 
