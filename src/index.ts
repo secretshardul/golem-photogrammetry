@@ -12,9 +12,19 @@ app.use(express.static(__dirname + '/public'))
 
 const upload = multer({ storage: multer.memoryStorage() })
 
+app.get('/download', (req, res) => {
+    const { fileName } = req.query
+    console.log('sending file', fileName)
+
+    if(fileName && typeof(fileName) === 'string') {
+        const file = path.join(__dirname, 'response', fileName)
+        res.download(file) // Set disposition and send it.
+    } else {
+        res.sendStatus(404)
+    }
+})
+
 app.post('/', upload.array('zip'), async (req, res) => {
-
-
 
     console.log('text body', req.body)
     const {micmacScript, email} = req.body
