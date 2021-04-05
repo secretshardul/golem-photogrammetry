@@ -2,9 +2,9 @@
   "name": "micmac-golem-backend",
   "version": "0.0.0",
   "scripts": {
-    "build": "./node_modules/.bin/ts-node build.ts",
+    "build": "./node_modules/.bin/ts-node -r dotenv/config build.ts",
     "lint": "eslint . --ext .ts",
-    "start": "node -r module-alias/register ./dist --env=production",
+    "start": "node -r module-alias/register -r dotenv/config ./dist --env=production",
     "start:dev": "nodemon",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\", \"resolveJsonModule\": true}' mocha --timeout 15000000 -r ts-node/register 'tests/*.ts'",
     "yagna": "yagna service run"
@@ -86,7 +86,9 @@
     "@types/find": "^0.2.1",
     "@types/fs-extra": "^9.0.9",
     "@types/jasmine": "^3.6.9",
+    "@types/js-sha512": "^0.7.0",
     "@types/jsonfile": "^6.0.0",
+    "@types/jsrsasign": "^8.0.10",
     "@types/morgan": "^1.9.2",
     "@types/multer": "^1.4.5",
     "@types/node": "^14.14.37",

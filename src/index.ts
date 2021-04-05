@@ -32,10 +32,6 @@ app.post('/', upload.array('zip'), async (req, res) => {
     const zip = files.pop()
     console.log('zip file', zip)
 
-    // res.redirect('/success.html')
-    // await sendSuccessMail(email, 'https://localhost:3000/download?fileName=output.zip')
-    // await sendFailureMail(email)
-
     if(zip && micmacScript && email) {
         const filePath = path.join(__dirname, zip.originalname)
         let instructions = micmacScript.split('\n') as string[]
