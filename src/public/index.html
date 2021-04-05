@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <title>Golem Photogrammetry</title>
   <link rel="stylesheet" href="./style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"
+    integrity="sha512-hc0zo04EIwTzKLvp2eycDTeIUuvoGYYmFIjYx7DmfgQeZPC5N27sPG2wEQPq8d8fCTwuguLrI1ffatqxyTbHJw=="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/shell/shell.min.js"
+    integrity="sha512-XgDqDL1gXdiG/pLBnn7W+08Ajap6ycB3jVD0db1oBwtQevc1DIRvU3fotxsr58GvfzH2pi64roId2YkocyAPzQ=="
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css"
+    integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw=="
+    crossorigin="anonymous" />
 
 </head>
 <body>
@@ -13,7 +22,8 @@
     <h1>Golem Photogrammetry</h1>
     <ul>
       <li>
-        <textarea name="micmacScript" placeholder="Shell script"></textarea>
+        <h4>Micmac shell script</h4>
+        <textarea name="micmacScript" id="script-editor" placeholder="Shell script"></textarea>
       </li>
       <li>
         <div class="grid grid-2">
