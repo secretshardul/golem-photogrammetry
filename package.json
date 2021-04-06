@@ -4,7 +4,7 @@
   "scripts": {
     "build": "./node_modules/.bin/ts-node -r dotenv/config build.ts",
     "lint": "eslint . --ext .ts",
-    "start": "node -r module-alias/register -r dotenv/config ./dist --env=production",
+    "start": "node -r dotenv/config ./dist",
     "start:dev": "nodemon",
     "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\", \"resolveJsonModule\": true}' mocha --timeout 15000000 -r ts-node/register 'tests/*.ts'",
     "yagna": "yagna service run"
