@@ -7,6 +7,11 @@ An online IDE which lets you run Micmac photogrammetry workloads on Golem. Photo
 - Run intense workloads on Golem cloud, without consuming local resources.
 - Build results notified on email.
 
+## Project demo
+http://65.0.59.23/
+
+Note: Ping @the.godfather on Golem Discord server or raise an issue if facing issues. Yagna daemon is unstable on EC2.
+
 ## Demo video
 [![1 golem-youtube](https://user-images.githubusercontent.com/49580849/113905798-2a72a100-97f1-11eb-8365-1e080b9abbfb.png)](https://www.youtube.com/watch?v=A0-PHUgftMk)
 
@@ -45,3 +50,8 @@ https://80.lv/articles/chernobolyte-game-based-on-3d-scanned-chernobyl/
 ## Limitations
 - Micmac is a low-level programming framework. There is no GUI, but rather developers need to supply a shell script program and hyperparameters.
 - There's no generic script for multiple scanning workloads. Developers are expected to provide the orientation data and processing instructions.
+
+## References
+- Photogrammetry: https://en.wikipedia.org/wiki/Photogrammetry
+- Micmac: https://github.com/micmacIGN/micmac
+- Chernobolyte: https://80.lv/articles/chernobolyte-game-based-on-3d-scanned-chernobyl/
