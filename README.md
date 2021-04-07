@@ -1,4 +1,4 @@
-# Photogrammetry(3D scanning) on Golem
+# Photogrammetry (3D scanning) on Golem
 An online IDE which lets you run Micmac photogrammetry workloads on Golem. Photogrammetry jobs are resource intensive and can run into hours. Golem is ideal for such batch workloads.
 
 ## Features
@@ -35,6 +35,12 @@ https://80.lv/articles/chernobolyte-game-based-on-3d-scanned-chernobyl/
 - Start golem locally using `yagna service run`
 - Open a new terminal and run `yagna payment init --sender`. Then start Node server using `npm run start:dev`
 - Follow the instructions on `localhost:3000`
+
+## Tech stack
+- Golem requester and Golem Node.js SDK
+- Typescript
+- Express.js
+- Sendgrid email service
 
 ## Limitations
 - Micmac is a low-level programming framework. There is no GUI, but rather developers need to supply a shell script program and hyperparameters.
