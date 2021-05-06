@@ -41,6 +41,15 @@ https://80.lv/articles/chernobolyte-game-based-on-3d-scanned-chernobyl/
 - Open a new terminal and run `yagna payment init --sender`. Then start Node server using `npm run start:dev`
 - Follow the instructions on `localhost:3000`
 
+## Testing other photogrammetry workloads
+
+- Download a sample dataset from https://micmac.ensg.eu/data/
+- Extract the zip file and find the runner shell script
+- The raw images and hyperparameters will be sent to a folder `/golem/resource/extracted/` on Golem. Accordingly modify the paths in the shell script.
+
+![datasets](![image](https://user-images.githubusercontent.com/49580849/117320192-9c4e1100-aea9-11eb-8c49-16253bbf40e9.png)
+)
+
 ## Tech stack
 - Golem requester and Golem Node.js SDK
 - Typescript
